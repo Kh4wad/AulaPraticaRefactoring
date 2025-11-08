@@ -34,6 +34,23 @@ public class Customer {
         return result;
       }
 
+   public String htmlStatement() {
+      Enumeration rentals = _rentals.elements();
+      String result = "<H1>Rentals for <EM>" + getName() + "</EM></H1><P>\n";
+      while (rentals.hasMoreElements()) {
+         Rental each = (Rental) rentals.nextElement();
+         // show figures for each rental
+         result += each.getMovie().getTitle()+ ": " +
+            String.valueOf(each.getCharge()) + "<BR>\n";
+      }
+      // add footer lines
+      result +=  "<P>You owe <EM>" + String.valueOf(getTotalCharge()) + "</EM><P>\n";
+      result += "On this rental you earned <EM>" +
+            String.valueOf(getTotalFrequentRenterPoints()) +
+            "</EM> frequent renter points<P>";
+      return result;
+   }
+
       private double getTotalCharge() {
          double result = 0;
          Enumeration rentals = _rentals.elements();
@@ -53,5 +70,29 @@ public class Customer {
          }
          return result;
       }
+
+      /* 
+   public static void main(String[] args) {
+      // Create a customer
+      Customer customer = new Customer("John Doe");
+
+      // Create some movies
+      Movie movie1 = new Movie("The Matrix", Movie.REGULAR);
+      Movie movie2 = new Movie("Star Wars", Movie.NEW_RELEASE);
+      Movie movie3 = new Movie("Toy Story", Movie.CHILDRENS);
+
+      // Create rentals
+      customer.addRental(new Rental(movie1, 3));  // Regular movie for 3 days
+      customer.addRental(new Rental(movie2, 2));  // New release for 2 days
+      customer.addRental(new Rental(movie3, 4));  // Children's movie for 4 days
+
+      // Print both statement formats
+      System.out.println("PLAIN TEXT STATEMENT:");
+      System.out.println(customer.statement());
+      System.out.println("\nHTML STATEMENT:");
+      System.out.println(customer.htmlStatement());
+   }
+
+   */
 }
 
