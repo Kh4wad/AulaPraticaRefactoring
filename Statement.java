@@ -1,6 +1,17 @@
 import java.util.Enumeration;
 
 public abstract class Statement {
+    // MÉTODO VALUE VOLTA PARA A SUPERCLASSE COMO TEMPLATE METHOD
+    public String value(Customer aCustomer) {
+        Enumeration rentals = aCustomer.getRentals();
+        String result = header(aCustomer);
+        while (rentals.hasMoreElements()) {
+            Rental each = (Rental) rentals.nextElement();
+            result += eachLine(each);
+        }
+        result += footer(aCustomer);
+        return result;
+    }
 
     protected abstract String header(Customer aCustomer);
     protected abstract String eachLine(Rental aRental);

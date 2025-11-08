@@ -1,18 +1,6 @@
-import java.util.Enumeration;
-
 public class HtmlStatement extends Statement {
-    // MÉTODO VALUE ADICIONADO AQUI - IDÊNTICO AO TextStatement
-    public String value(Customer aCustomer) {
-        Enumeration rentals = aCustomer.getRentals();
-        String result = header(aCustomer);
-        while (rentals.hasMoreElements()) {
-            Rental each = (Rental) rentals.nextElement();
-            result += eachLine(each);
-        }
-        result += footer(aCustomer);
-        return result;
-    }
-
+    // REMOVER método value - agora está na superclasse
+    
     @Override
     protected String header(Customer aCustomer) {
         return "<H1>Rentals for <EM>" + aCustomer.getName() + "</EM></H1><P>\n";
